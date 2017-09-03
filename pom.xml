@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.github.emabrey</groupId>
+    <artifactId>jni-header</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>nar</packaging>
+
+    <name>JNI Headers</name>
+    <description>Provides the platform specific headers needed for compiling native JNI enabled libraries.</description>
+    <url>https://github.com/emabrey/jni-headers/</url>
+
+    <developers>
+        <developer>
+            <id>emabrey</id>
+            <name>Emily Mabrey</name>
+            <email>emabrey@users.noreply.github.com</email>
+            <organizationUrl>https://github.com/emabrey</organizationUrl>
+            <timezone>-5</timezone>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>GNU GENERAL PUBLIC LICENSE VERSION 2</name>
+            <url>https://opensource.org/licenses/GPL-2.0.php</url>
+            <comments>Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.</comments>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/emabrey/jni-headers</url>
+        <connection>scm|git|git://github.com/emabrey/jni-headers.git</connection>
+        <developerConnection>scm|git|https://emabrey@github.com/emabrey/jni-headers.git</developerConnection>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/emabrey/jni-headers/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>travis-ci</system>
+        <url>https://travis-ci.org/emabrey/jni-headers</url>
+    </ciManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lineLength>120</lineLength>
+        <indentSize>4</indentSize>
+
+        <nar-maven-plugin.version>3.5.2</nar-maven-plugin.version>
+    </properties>
+
+
+    <profiles>
+
+        <!-- Profile which enables the debug build configuration. Can be used by adding the "-Pdebug" option to the
+             execution of the Maven build.
+        -->
+        <profile>
+            <id>debug</id>
+            <properties>
+                <nar-maven-plugin.cpp.debug>true</nar-maven-plugin.cpp.debug>
+                <nar-maven-plugin.cpp.optimize>true</nar-maven-plugin.cpp.optimize>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <defaultGoal>package</defaultGoal>
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <buildNumberPropertyName>project.version.build</buildNumberPropertyName>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                </configuration>
+            </plugin>
+
+
+            <!-- Native ARchive plugin for Maven which provides support for C, C++ and Fortran compilation for native
+                 targets as a part of a standard Maven build lifecycle. The plugin is configured to generate a NAR
+                 archive containing the include files for the JNI process for the various JDK versions supported by the
+                 project.
+            -->
+            <plugin>
+                <groupId>com.github.maven-nar</groupId>
+                <artifactId>nar-maven-plugin</artifactId>
+                <version>3.5.2</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <aol>noarch</aol>
+                    <linker>
+                        <name>g++</name>
+                    </linker>
+                    <cpp>
+                        <name>g++</name>
+                    </cpp>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
