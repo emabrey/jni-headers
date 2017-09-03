@@ -1,15 +1,13 @@
-matrix:
-  include:
-    - language: cpp
-      compiler:
-        - gcc
-      os:
-       - linux
-       - osx
-    - language: java
-      jdk: 
-        - oraclejdk8
-        - openjdk8
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - oracle-java8-installer
+    - gcc
+    - g++
+
+language: java
 
 before_install:
   - git submodule update --init --recursive
