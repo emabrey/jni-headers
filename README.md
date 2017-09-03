@@ -1,3 +1,5 @@
-# JNI Headers [![Latestver](https://lv.binarybabel.org/catalog-api/java/jdk8.svg?v=8u144-b01)](https://lv.binarybabel.org/catalog/java/jdk8)
+# JNI Headers 
+[![Build Status](https://travis-ci.org/emabrey/jni-headers.svg?branch=master)](https://travis-ci.org/emabrey/jni-headers)
+[![Latest JDK Version](https://lv.binarybabel.org/catalog-api/java/jdk8.svg?v=8u144-b01)](https://lv.binarybabel.org/catalog/java/jdk8)
 
 Provides the platform specific headers needed for compiling native JNI enabled libraries. The JDK comes with only the headers needed to target the host/development system and lacks the headers required to target other operating systems or CPUs. By providing these headers in a central location I hope to streamline access and availability of these header files. Note that these headers are all copyrighted by Oracle and affiliates of Oracle. These headers are provided under an exclusive copyleft license, known as the `GNU GENERAL PUBLIC LICENSE Version 2` (GPLv2). The terms of that license allow me to redistribute these files to others without modification. To view the terms of the license governing the JNI headers please read the `LICENSE` file in the root directory of the project. I, Emily Mabrey, do not own any part of the code I am distributing here unless otherwise specified explicitly at the top of a given file.
